@@ -11,9 +11,12 @@ sub new {
 
 	my %opts = (ref $_[0]) ? ((ref $_[0] eq 'HASH') ? %{$_[0]} : () ) : @_;
 
+	$self->{opts} = \%opts;
+
 	$self->{port}		= $opts{port}		|| 8765;
 	$self->{rollup_secs}	= $opts{rollup_secs}	|| 5;
 	$self->{max_datagram}	= $opts{max_datagram}	|| 1024;
+	$self->{debug}		= $opts{debug}		|| 0;
 
 	return $self;
 }
@@ -37,7 +40,7 @@ sub run_server {
 	#
 
 	local $SIG{ALRM} = sub {
-		$self->rollup_stats();
+		$self->rollup_stats(0);
 		alarm($self->{rollup_secs});
 	};
 	alarm($self->{rollup_secs});
@@ -77,11 +80,11 @@ sub run_server {
 	# a final rollup incase we have data in our buffers
 	#
 
-	$self->rollup_stats();
+	$self->rollup_stats(1);
 }
 
 sub rollup_stats {
-	my ($self) = @_;
+	my ($self, $last) = @_;
 
 	print "\nrollup!\n";
 }
