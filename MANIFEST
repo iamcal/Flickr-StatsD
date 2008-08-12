@@ -1,0 +1,5 @@
+Makefile.PL
+MANIFEST
+lib/Flickr/StatsD.pm
+clients/simple-demo.pl
+clients/simple-demo.php
