@@ -1,5 +1,10 @@
 Makefile.PL
 MANIFEST
 lib/Flickr/StatsD.pm
+lib/Flickr/StatsD/Buckets.pm
+lib/Flickr/StatsD/Quartiles.pm
+lib/Flickr/StatsD/TimingGraphs.pm
+lib/Flickr/StatsD/YesNo.pm
 clients/simple-demo.pl
 clients/simple-demo.php
+clients/timings.php
