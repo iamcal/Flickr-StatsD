@@ -6,7 +6,7 @@ use warnings;
 use base 'Flickr::StatsD';
 
 sub new {
-	my ($class) = @_;
+	my $class = shift;
 
 	my $self = $class->SUPER::new(@_);
 
