@@ -8,3 +8,4 @@ lib/Flickr/StatsD/YesNo.pm
 clients/simple-demo.pl
 clients/simple-demo.php
 clients/timings.php
+t/01-simple.t
