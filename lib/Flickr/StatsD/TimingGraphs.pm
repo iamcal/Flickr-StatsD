@@ -5,7 +5,6 @@ use warnings;
 
 use Flickr::StatsD::Quartiles;
 use Flickr::StatsD::YesNo;
-use Data::Dumper;
 
 use base 'Flickr::StatsD::Buckets';
 
@@ -24,10 +23,12 @@ sub rollup_cat {
 sub save_data {
 	my ($self, $data) = @_;
 
-	print "data has been rolled up for $data->{c}\n";
-	print Dumper $data;
+	if ($data->{c} =~ m/^ok_/){
 
-	# TODO: save to the actual graphs here
+		Flickr::StatsD::YesNo::save_data(@_);
+	}else{
+		Flickr::StatsD::Quartiles::save_data(@_);
+	}
 }
 
 1;
