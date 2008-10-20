@@ -90,8 +90,8 @@ sub rollup_bucket {
 		for my $cat (keys %{$self->{seen_cats}}){
 			if (! defined $this_cats->{$cat}){
 
-				print "rolling up zero cat for $cat\n";
-				#$self->rollup_cat($bucket_time, $cat, []);
+				print "rolling up zero cat for $cat...\n";
+				$self->rollup_cat($bucket_time, $cat, []);
 			}
 		}
 	}

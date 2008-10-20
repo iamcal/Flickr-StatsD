@@ -9,7 +9,10 @@ use base 'Flickr::StatsD::Buckets';
 sub rollup_cat {
         my ($self, $time, $cat, $samples) = @_;
 
-	my $counts = {};
+	my $counts = {
+		0 => 0,
+		1 => 0,
+	};
 
 	for (@{$samples}){
 

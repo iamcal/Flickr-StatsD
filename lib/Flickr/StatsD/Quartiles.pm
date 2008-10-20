@@ -11,6 +11,17 @@ sub rollup_cat {
 
 	my @all = sort { $a <=> $b } @{$samples};
 
+	my $info = {
+		't'  => $time,
+		'c'  => $cat,
+		'lo' => 0,
+		'q1' => 0,
+		'q2' => 0,
+		'q3' => 0,
+		'hi' => 0,
+		'sm' => 0,		
+	};
+
 	my $lo = $all[0];
 	my $hi = $all[-1];
 
@@ -18,32 +29,28 @@ sub rollup_cat {
 	my $lo_c = int $num / 2;
 	my $hi_c = $num - $lo_c;
 
-	return if $lo_c == 0;
-	return if $hi_c == 0;
+	if ($lo_c > 0 && $hi_c > 0){
 
-	my @lo = splice @all, 0, $lo_c;
-	my @hi = @all;
+		my @lo = splice @all, 0, $lo_c;
+		my @hi = @all;
 
-	my $lo_sum = 0;
-	my $hi_sum = 0;
+		my $lo_sum = 0;
+		my $hi_sum = 0;
 
-	$lo_sum += $_ for @lo;
-	$hi_sum += $_ for @hi;
+		$lo_sum += $_ for @lo;
+		$hi_sum += $_ for @hi;
 
-	my $q1 = $lo_sum / $lo_c;
-	my $q2 = ($lo_sum + $hi_sum) / ($lo_c + $hi_c);
-	my $q3 = $hi_sum / $hi_c;
+		my $q1 = $lo_sum / $lo_c;
+		my $q2 = ($lo_sum + $hi_sum) / ($lo_c + $hi_c);
+		my $q3 = $hi_sum / $hi_c;
 
-	my $info = {
-		't'  => $time,
-		'c'  => $cat,
-		'lo' => $lo,
-		'q1' => $q1,
-		'q2' => $q2,
-		'q3' => $q3,
-		'hi' => $hi,
-		'sm' => $num,
-	};
+		$info->{lo} = $lo;
+		$info->{q1} = $q1;
+		$info->{q2} = $q2;
+		$info->{q3} = $q3;
+		$info->{hi} = $hi;
+		$info->{sm} = $num;
+	}
 
 	$self->save_data($info);
 }
