@@ -12,6 +12,7 @@ sub new {
 
 	$self->{buckets} = {};
 	$self->{bucket_seconds} = $self->{opts}->{bucket_seconds} || 10;
+	$self->{seen_cats} = {};
 
 	bless $self, $class;
 	return $self;
@@ -52,7 +53,9 @@ sub rollup_stats {
 	# case we rollup all remaining buckets.
 	#
 
-	for my $bucket(keys %{$self->{buckets}}){
+	my @buckets = sort keys %{$self->{buckets}};
+
+	for my $bucket(@buckets){
 
 		if ($bucket < $current_bucket || $last){
 
@@ -70,10 +73,27 @@ sub rollup_bucket {
 	#
 
 	my $bucket_time = $self->bucket_to_time($bucket);
+	my $this_cats = {};
 
 	for my $cat(keys %{$self->{buckets}->{$bucket}}){
 
 		$self->rollup_cat($bucket_time, $cat, $self->{buckets}->{$bucket}->{$cat});
+
+		if ($self->{opts}->{zero_cats}){
+
+			$self->{seen_cats}->{$cat} = 1;
+			$this_cats->{$cat} = 1;
+		}
+	}
+
+	if ($self->{opts}->{zero_cats}){
+		for my $cat (keys %{$self->{seen_cats}}){
+			if (! defined $this_cats->{$cat}){
+
+				print "rolling up zero cat for $cat\n";
+				#$self->rollup_cat($bucket_time, $cat, []);
+			}
+		}
 	}
 }
 
