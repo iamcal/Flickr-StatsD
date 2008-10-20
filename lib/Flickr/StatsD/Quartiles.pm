@@ -51,7 +51,7 @@ sub rollup_cat {
 sub save_data {
 	my ($self, $data) = @_;
 
-	my $insert_data = "$data->{d}:$data->{q1}:$data->{q2}:$data->{q3}:$data->{lo}:$data->{hi}:$data->{t}";
+	my $insert_data = "$data->{t}:$data->{q1}:$data->{q2}:$data->{q3}:$data->{lo}:$data->{hi}:$data->{sm}";
 
 
 	#

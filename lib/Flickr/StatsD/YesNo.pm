@@ -29,7 +29,7 @@ sub rollup_cat {
 sub save_data {
 	my ($self, $data) = @_;
 
-	my $insert_data = "$data->{d}:$data->{ok}:$data->{fl}";
+	my $insert_data = "$data->{t}:$data->{ok}:$data->{fl}";
 
 
 	#
