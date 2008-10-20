@@ -6,6 +6,6 @@ WriteMakefile(
 	'PREREQ_PM'	=> {
 		'IO::Socket'	=> 0,
 		'IO::Select'	=> 0,
-		#'Test::More'   => 0,
+		'Test::More'   => 0,
 	},
 );
