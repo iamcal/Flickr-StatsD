@@ -3,7 +3,7 @@
 This is the original (2008) version of StatsD. **Do not use it in production**.
 It is presented here as a piece of history, rather than useful working code.
 The original Flickr public SVN repo disappeared in 2010, so this is as close
-to an 'official' mirror as you'll fine.
+to an 'official' mirror as you'll find.
 
 Due to the way the collection rollup works, via alarms, the daemon chews up way
 more CPU than it should. It's also written in Perl. From the past.
